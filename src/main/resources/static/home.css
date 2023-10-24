@@ -1,0 +1,238 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    min-height: 98vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+    border-width: 3px;
+    border-radius: 5px;
+    background-color: #dfdfdf;
+    padding: 8px;
+}
+
+.profilePic{
+    border-radius: 50%;
+    border-style: solid;
+    border-width: thick;
+    box-shadow: 0px 0px 10px #888888;
+    border-color: white;
+    height: 15vw;
+    max-height: 148px;
+    margin-right: 1.5vw;
+    margin-left: 1.2vw;
+}
+
+.farUpperLeft{
+    flex :0;
+}
+.farUpperRight{
+    flex :1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #cfcfcf;
+}
+
+.sideBar{
+    flex: 0.1;
+    display: flex;
+    flex-direction: column;
+    
+    background-color: #cfcfcf;
+    padding-left: 3vw;
+    
+}
+
+.mainContent{
+    flex: 0.9;
+    display: flex;
+    padding-left: min(6vw,48px);
+    padding-right: 2vw;
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(270deg,#dfdfdf,white);
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cardDiv{
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-style: solid;
+    border-radius: 18px;
+    border-width: thick;
+    border-color: white;
+    box-shadow: 0px 0px 10px #888888;
+    margin: 1.2vw;
+    display: flex;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    align-items: center;
+    max-width: 350px;
+    animation: slideup 1s forwards;
+}
+
+h1{
+    font-size: 6vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    animation: slideup 1s forwards;
+}
+
+@keyframes slideup {
+    0%{
+        transform: translateY(60px);
+        opacity: 0%;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 100%;
+    }
+}
+
+.content-hover-title{
+    font-size: 8vw;
+    float: left;
+    transition: all 1s;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.content-title{
+    font-size: 5vw;
+    max-width: 700px;
+    text-align: left;
+    font-weight: normal;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    animation: slideup 1s forwards;
+}
+
+.content-text{
+    font-size: calc(1.1vw + 1vh);
+    max-width: 680px;
+    text-align: left;
+    font-weight: lighter;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    animation: slideup 1s forwards;
+}
+
+.content-subTitle{
+    font-size: calc(1.1vw + 1vh);
+    text-align: left;
+    font-family: serif;
+    font-weight: lighter;
+    color: #7970ad;
+    animation: slideup 1s forwards;
+}
+
+.content-img{
+    width: 23vw;
+    margin-left: 3vw;
+    margin-top: 3vw;
+    border-radius: 20px;
+    animation: slideup 1s forwards;
+}
+
+.card-img{
+    border-radius: 20px;
+    height: 10vh;
+}
+
+
+.sidebuttonsDivs{
+    flex :0;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-right: unset;
+    margin-right: 2vw;
+    background-color:#dfdfdf ;
+    
+    border-radius: 20px;
+}
+.sidebuttons{
+    flex: 1;
+    border-style: unset;
+    padding-right: 13px;
+    padding: 20px;
+    text-align: left;
+    border-radius: 20px;
+    background-color:transparent;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: 1s all;
+    
+}
+
+.sidebuttonsDivs:hover{
+    animation: sidehover 1s forwards;
+}
+
+.sidebuttonsDivs:not(:hover){
+    animation: sideUnhover 1s forwards;
+}
+
+
+@keyframes sidehover {
+    0%{
+        border-radius: 20px;
+    }
+    60%{
+        padding-right: 2vw;
+        margin-right: 0px;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+    }
+    100% {
+        padding-right: 2vw;
+        margin-right: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    
+}
+
+@keyframes sideUnhover {
+    0%{
+        padding-right: 2vw;
+        margin-right: 0px; 
+    }
+    100% {
+        padding-right: 0vw;
+        margin-right: 2vw;
+        border-radius: 20px;
+    }
+    
+}
+
+.sidePan{
+    flex :0;
+}
+.footer{
+    margin: 2px;
+    border-width: 3px;
+    border-radius: 5px;
+    background-color: #a9a9a9;
+    padding: 1vw;
+}
