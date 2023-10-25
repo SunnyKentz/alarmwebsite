@@ -1,45 +1,66 @@
+/**
+ * 
+ * 
+ * HEY!!! GET OUT OF HERE WIN FAIRLY. DONT !
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * HEY!!! GOOOO AWAAAAYYYYY
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+let visitor = 0;
 function init(){
-    $("#firstSideDiv").mouseover(function(){
-        $(".mainContent").animate({"border-top-left-radius": "0px"},700);
-    });
+    var form = document.getElementById("myForm");
+    function handleForm(event) { event.preventDefault(); get(); } 
+    form.addEventListener('submit', handleForm);
 
-    $("#firstSideDiv").on('mouseleave', function() {
-        $(".mainContent").animate({"border-top-left-radius": "20px"},700);
-    });
-
-    $(".sideBar").children(`:nth-child(1)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("présentation"))
-    });
-
-    $(".sideBar").children(`:nth-child(2)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("Compétence"))
-    });
-
-    $(".sideBar").children(`:nth-child(3)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("Expérience professionnel"))
-    });
-
-    $(".sideBar").children(`:nth-child(4)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("Expérience de Travail"))
-    });
-
-    $(".sideBar").children(`:nth-child(5)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("Projets personels"))
-    });
-
-    $(".sideBar").children(`:nth-child(6)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("Autres versions de ce site"))
-    });
-
-    $(".sideBar").children(`:nth-child(7)`).mouseover(function(){
-        $(".mainContent").empty()
-        $(".mainContent").append($('<h1>').text("C.V."))
+    fetch("./visitors",{
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        headers:{
+          'Content-Type': 'application/json'
+        }
+    })
+    .then(function(answer){
+        return answer.json()
+    }).then(function(answer){
+        visitor = answer.visitors;
+        document.getElementById("intro").append(`you are the ${visitor}th visitor`)
     });
 }
 function resetButtons(except=null){
@@ -72,368 +93,93 @@ function setButtons(button){
     }
 }
 
-
-async function presentation(){
-    resetButtons()
-    setButtons(1)
+function get(){
+    var text = document.getElementById("endpoint").value;
+    var text = text.toLowerCase();
+    var text = text.replaceAll("!","");
+    var text = text.replaceAll(" ","");
+    let endpoint = text.trim();
     
-    await fetch("http://172.105.97.204/presentation",{
+        fetch("http://localhost:8080/"+endpoint,{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
+          'Content-Type': 'application/json'}
+        
+    }).then(async function(ans) {
+        if(ans.ok) {
+            let answer = await ans.json();
+
+        var content = $('<div>');
+        content.addClass('mainContent');
+
+        //add title
+        var titre = $('<h1>').text(answer.title)
+        content.append(titre);
+
+        //add image
+        var img = $(`<img src="${answer.src}">`);
+        img.addClass('logo');
+        img.add
+        content.append(img);
+
+        //add text
+        var text = $('<p>').text(answer.text)
+        content.append(text);
+
+        //add input
+        var form = $('<form id="myForm">')
+        var inp = $('<input id="endpoint" type="text" onsubmit="return get()">')
+        form.append(inp);
+        content.append(form);
+
+        $("#modifiable").empty()
+        $("#modifiable").append(content)
+        
+        
+        var form = document.getElementById("myForm");
+        function handleForm(event) { event.preventDefault(); get(); } 
+        form.addEventListener('submit', handleForm);
+        }else{
+            err();
         }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
 
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        var text = $('<p>').text(answer.francais.Text)
-        text.addClass('content-text')
-
-        var outerDiv = $('<div>');
-        outerDiv.append(titre);
-        outerDiv.append(text);
-
-        var img = $(`<img src="${answer.src}" alt="profile">`);
-        img.addClass('content-img')
-
-        var content = $('<div>')
-        content.addClass('content')
-        content.append(outerDiv)
-        content.append(img)
-
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
+    });
     
 }
 
-async function competence(){
-    resetButtons()
-    setButtons(2)
 
-    await fetch("http://172.105.97.204/competence",{
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
-        }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
-        
-        var outerDiv = $('<div>');
+function err(){
 
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        outerDiv.append(titre);
+    var content = $('<div>');
+    content.addClass('mainContent');
 
-        var text = $('<span>').text(answer.francais.sousTitre1)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text1)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        var text = $('<span>').text(answer.francais.sousTitre2)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text2)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        var text = $('<span>').text(answer.francais.sousTitre3)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text3)
-        text.addClass('content-text')
-        outerDiv.append(text);
+    //add title
+    var titre = $('<h1>').text("wrong answer")
+    content.append(titre);
 
-        var img = $(`<img src="${answer.src}" alt="SocialSkills">`);
-        img.addClass('content-img')
+    //add image
+    var img = $('<img src="logoIOS.png" class="logo">');
+    img.addClass('logo');
+    img.add
+    content.append(img);
 
-        var content = $('<div>')
-        content.addClass('content')
-        content.append(outerDiv)
-        content.append(img)
+    //add text
+    var text = $('<p>').text("The rules are simple : in my pinned video there is a text that the app shows when you haven't scanned your nfc tag yet and the alarm is ringing, type down the text ⬇️")
+    content.append(text);
 
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
-}
+    //add input
+    var form = $('<form id="myForm">')
+    var inp = $('<input id="endpoint" type="text" onsubmit="return get()">')
+    form.append(inp);
+    content.append(form);
 
-async function professionnel(){
-    resetButtons()
-    setButtons(3)
+    $("#modifiable").empty()
+    $("#modifiable").append(content)
 
-    await fetch("http://172.105.97.204/professionnel",{
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
-        }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
-        
-        var outerDiv = $('<div>');
 
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        outerDiv.append(titre);
-
-        var text = $('<span>').text(answer.francais.sousTitre1)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text1)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var text = $('<p>').text(answer.francais.Text2)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var text = $('<p>').text(answer.francais.Text3)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        
-        var text = $('<p>').text(answer.francais.Text4)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var img = $(`<img src="${answer.src}" alt="telcobridgesLogo">`);
-        img.addClass('content-img')
-
-        var content = $('<div>')
-        content.addClass('content')
-        content.append(outerDiv)
-        content.append(img)
-
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
-}
-
-async function Travail(){
-    resetButtons()
-    setButtons(4)
-    
-    await fetch("http://172.105.97.204/travail",{
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
-        }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
-        
-        var outerDiv = $('<div>');
-
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        outerDiv.append(titre);
-
-        var text = $('<span>').text(answer.francais.sousTitre1)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text1)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text2)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var text = $('<span>').text(answer.francais.sousTitre2)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text3)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text4)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var img = $(`<img src="${answer.src}" alt="coucheTard">`);
-        img.addClass('content-img')
-
-        var content = $('<div>')
-        content.addClass('content')
-        content.append(outerDiv)
-        content.append(img)
-
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
-}
-
-async function projets(){
-    resetButtons()
-    setButtons(5)
-
-    await fetch("http://172.105.97.204/projets",{
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
-        }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
-        
-        var outerDiv = $('<div>');
-
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        outerDiv.append(titre);
-
-        var text = $('<span>').text(answer.francais.sousTitre1)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text1)
-        text.addClass('content-text')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text2)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var img = $(`<img src="${answer.src1}" alt="Chat app">`);
-        img.addClass('content-img')
-        outerDiv.append(img)
-
-        var img = $(`<img src="${answer.src2}" alt="chat app 2">`);
-        img.addClass('content-img')
-        outerDiv.append(img)
-
-        var text = $('<p>')
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var text = $('<span>').text(answer.francais.sousTitre2)
-        text.addClass('content-subTitle')
-        outerDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text3)
-        text.addClass('content-text')
-        outerDiv.append(text);
-
-        var img = $(`<img src="${answer.src3}" alt="code">`);
-        img.addClass('content-img')
-
-        var content = $('<div>')
-        content.addClass('content')
-        outerDiv.append(img)
-        content.append(outerDiv)
-
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
-}
-
-async function Autres(){
-    resetButtons()
-    setButtons(6)
-    await fetch("http://172.105.97.204/autres",{
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers:{
-          'Content-Type': 'application/json',
-          'orggin' : "from-app"
-        }
-          
-    })
-    .then(function(answer){
-        return answer.json()
-    }).then(function(answer){
-        
-        var outerDiv = $('<div>');
-
-        var titre = $('<h2>').text(answer.francais.Titre)
-        titre.addClass('content-title')
-        outerDiv.append(titre);
-
-        var innerDiv = $('<div>');
-        innerDiv.addClass('content')
-
-        var cardDiv = $('<button>')
-        cardDiv.addClass('cardDiv')
-        var innerCardDiv = $('<div>');
-        var text = $('<span>').text(answer.francais.sousTitre1)
-        text.addClass('content-subTitle')
-        innerCardDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text1)
-        innerCardDiv.append(text);
-        var img = $(`<img src="${answer.src1}" alt="spring">`);
-        img.addClass('card-img')
-        cardDiv.append(innerCardDiv);
-        cardDiv.append(img)
-        innerDiv.append(cardDiv)
-
-        var cardDiv = $('<button>')
-        cardDiv.addClass('cardDiv')
-        var innerCardDiv = $('<div>');
-        var text = $('<span>').text(answer.francais.sousTitre2)
-        text.addClass('content-subTitle')
-        innerCardDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text2)
-        innerCardDiv.append(text);
-        var img = $(`<img src="${answer.src2}" alt="dotnet">`);
-        img.addClass('card-img')
-        cardDiv.append(innerCardDiv);
-        cardDiv.append(img)
-        innerDiv.append(cardDiv)
-
-        var cardDiv = $('<button>')
-        cardDiv.addClass('cardDiv')
-        var innerCardDiv = $('<div>');
-        var text = $('<span>').text(answer.francais.sousTitre3)
-        innerCardDiv.append(text);
-        var text = $('<p>').text(answer.francais.Text3)
-        innerCardDiv.append(text);
-        var img = $(`<img src="${answer.src3}" alt="nodejs">`);
-        img.addClass('card-img')
-        cardDiv.append(innerCardDiv);
-        cardDiv.append(img)
-        innerDiv.append(cardDiv)
-
-        outerDiv.append(innerDiv);
-
-        var content = $('<div>')
-        content.addClass('content')
-        content.append(outerDiv)
-
-        $(".mainContent").empty()
-        $(".mainContent").append(content)
-    })
-}
-
-async function cv(){
-    resetButtons()
-    setButtons(7)
-
-    var outerDiv = $('<div>');
-
-    var titre = $('<h2>').text("Mon CV")
-    titre.addClass('content-title')
-    outerDiv.append(titre);
-
-    var link = $('<a href="http://172.105.97.204/cv">').text("download")
-    outerDiv.append(link);
-
-    var content = $('<div>')
-    content.addClass('content')
-    content.append(outerDiv)
-
-    $(".mainContent").empty()
-    $(".mainContent").append(content)
+    var form = document.getElementById("myForm");
+    function handleForm(event) { event.preventDefault(); get(); } 
+    form.addEventListener('submit', handleForm);
 }
 
 $(document).ready(init);

@@ -7,56 +7,42 @@
     <link rel="stylesheet" href="home.css">
     <script defer src="home.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Sunny K. Derisme</title>
+    <title>Better Alarm</title>
 </head>
 <body>
     <div class="body">
         <div class="header">
-            <img src="profilePic.png" class="profilePic" alt="profile picture">
+            <a style="text-decoration: none;" href="https://www.tiktok.com/@kentz_softwares?is_from_webapp=1&sender_device=pc" ><img src="profilePic.png" class="profilePic" alt="profile picture"></a>
             <div class="farUpperRight">
-                <h2>Sunny Kentz Dérismé</h2>
-                <p>(438) 825 5295<br>
-                    derisme@live.ca<br>
-                    Terrebonne, QC
+                <a style="text-decoration: none;" href="https://www.tiktok.com/@kentz_softwares?is_from_webapp=1&sender_device=pc" ><h2>@Kentz_Softwares</h2></a>
+                <p>Hi, it's your boy Sunny<br>
+                    Better Alarm is an alarm app that uses the technology of<br>
+                    Near Field Communication to encourage heavy sleepers to get out<Br>
+                    of Bed. Follow me on tiktok to know more...
                 </p>
-                <h3>Site web personel créé avec Jquery et Java Spring</h3>
+                <p id= "intro"></p>
+                <h2>Welcome to my contest 😁 </h2>
             </div>
-            <div class="farUpperLeft">
-                <a href="homeEnglish.html">English</a>
+        </div>
+        <div id = "modifiable" class="center">
+            <div class="mainContent">
+                <h1>Better Alarm</h1>
+                <img src="logoIOS.png" class="logo">
+                <p>The rules are simple : in my pinned video there is a text that the app shows when you haven't scanned your nfc tag yet and the alarm is ringing, type down the text ⬇️</p>
+                <form id="myForm"><input id="endpoint" class="input" type="text" onsubmit="return get()"></form>
             </div>
         </div>
         <div class="center">
-            <div class="sideBar">
-                <div class="sidebuttonsDivs" id="firstSideDiv">
-                    <button class="sidebuttons" onclick={{presentation()}}>présentation</button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{competence()}}>Compétences</button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{professionnel()}}>Expérience professionnel</button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{Travail()}}>Expérience de Travail</button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{projets()}}>Projets personels</button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{Autres()}}>
-                    Autres versions de ce site
-                    </button>
-                </div>
-                <div class="sidebuttonsDivs">
-                    <button class="sidebuttons" onclick={{cv()}}>C.V.</button>
-                </div>
-                <div class="sidePan"></div>
-            </div>
             <div class="mainContent">
-                <h1>Bonjour</h1>
+                <h1>Download for Android</h1>
+                <p> I have already build the APK for field trial you can download it here, tell me what⬇️</p>
+                <a style="text-decoration: none;" href="./betterAlarm.apk" ><img src="APK.png" class="apk" alt="profile picture"></a>
             </div>
         </div>
-        <div class="footer"></div>
+
+        <div class="center">
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kentz_softwares" data-unique-id="kentz_softwares" data-embed-type="creator" style="max-width: 780px; min-width: 288px;" > <section> <a target="_blank" href="https://www.tiktok.com/@kentz_softwares?refer=creator_embed">@kentz_softwares</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+        </div>
     </div>
 </body>
 </html>
