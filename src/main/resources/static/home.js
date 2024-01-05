@@ -50,7 +50,7 @@ function init(){
     function handleForm(event) { event.preventDefault(); get(); } 
     form.addEventListener('submit', handleForm);
 
-    fetch("./visitors",{
+    fetch("http://www.betteralarm.info/visitors",{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers:{
           'Content-Type': 'application/json'
@@ -100,13 +100,17 @@ function get(){
     var text = text.replaceAll(" ","");
     let endpoint = text.trim();
     
-        fetch("http://localhost:8080/"+endpoint,{
+        fetch("http://www.betteralarm.info/"+endpoint,{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers:{
           'Content-Type': 'application/json'}
         
-    }).then(async function(ans) {
-        if(ans.ok) {
+    }).catch(function(){
+	alert("wrong answer verify the spelling :)");
+        err();
+        return;
+}).then(async function(ans) {
+        if(ans.status == 200) {
             let answer = await ans.json();
 
         var content = $('<div>');
@@ -139,9 +143,14 @@ function get(){
         var form = document.getElementById("myForm");
         function handleForm(event) { event.preventDefault(); get(); } 
         form.addEventListener('submit', handleForm);
-        }else{
-            err();
+	alert("success next question!");
+	
+	return;
         }
+	
+	alert("wrong answer verify the sepeling :)");
+        err();
+	return;
 
     });
     

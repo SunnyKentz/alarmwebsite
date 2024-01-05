@@ -38,7 +38,7 @@ public class MainController {
 
         return ResponseEntity.status(HttpStatus.OK).body(answer);
     }
-    @GetMapping("/remenbertoscanyournfcag")
+    @GetMapping("/remembertoscanyournfctag")
     @ResponseBody
     ResponseEntity<Map<String, Object>> firstSuccess(){
 
@@ -62,7 +62,7 @@ public class MainController {
 
         answer.put("title", "Congratulations !!!!");
 
-        answer.put("text", "GIFTCARD_NUMBER_HERE\n\nIf you did win and redeemed the giftcard please leave a comment on my tiktok so that i can prove i did do the contest");
+        answer.put("text", "GIFTCARD : C4LU-CLXBX8-KYAT  If you did win and redeemed the giftcard please leave a comment on my tiktok so that i can prove i did do the contest");
 
         answer.put("src","giftCard.jpg");
 
