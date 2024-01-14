@@ -50,7 +50,7 @@ function init(){
     function handleForm(event) { event.preventDefault(); get(); } 
     form.addEventListener('submit', handleForm);
 
-    fetch("http://www.betteralarm.info/visitors",{
+    fetch("https://www.betteralarm.info/visitors",{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers:{
           'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ function get(){
     var text = text.replaceAll(" ","");
     let endpoint = text.trim();
     
-        fetch("http://www.betteralarm.info/"+endpoint,{
+        fetch("https://www.betteralarm.info/"+endpoint,{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers:{
           'Content-Type': 'application/json'}
