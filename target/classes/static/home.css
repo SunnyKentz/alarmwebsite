@@ -11,9 +11,9 @@
     margin: 2px;
     border-width: 3px;
     border-radius: 20px;
-
     background-image: linear-gradient(90deg,#1fceff6e,#2b74d498);
     padding: 8px;
+    max-height: min(300px,40vh);
 }
 
 .profilePic{
@@ -99,7 +99,7 @@
 }
 
 h2{
-    font-size: 4vw;
+    font-size: min(40px,4vw);
     color: #1f2aff86;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     animation: slideup 1s forwards;
